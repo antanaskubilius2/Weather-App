@@ -1,65 +1,25 @@
-
-<head>
-    
-        <link rel="stylesheet" href="main.css">
-        <script type="text/javascript" src="main.js"></script>
-
-
-
-    
-</head>
-
-
-
-
-
-<div class="api">
-    <div class="container">🌞 Weather App Made With Care : Antanas Kubilius
-    </div>
-  </div>
-  <section class="top-banner">
-    <div class="container">
-      <h1 class="heading">Simple Weather App</h1>
-      <form>
-        <input type="text" placeholder="Search for a city" autofocus>
-        <button type="submit">SUBMIT</button>
-        <span class="msg"></span>
-      </form>
-    </div>
-  </section>
-  <section class="ajax-section">
-    <div class="container">
-      <ul class="cities"></ul>
-    </div>
-  </section>
-  <footer class="page-footer">
-    <div class="container">
-      </small>
-    </div>
-  
-  
-  
-    <script>
-
-    
-CSS JSResult Skip Results Iframe
-co
+/*SEARCH BY USING A CITY NAME (e.g. athens) OR A COMMA-SEPARATED CITY NAME ALONG WITH THE COUNTRY CODE (e.g. athens,gr)*/
+const form = document.querySelector(".top-banner form");
 const input = document.querySelector(".top-banner input");
 const msg = document.querySelector(".top-banner .msg");
 const list = document.querySelector(".ajax-section .cities");
-const apiKey = "c7fa462e993fe084815ee195c6b2f6f2";
+/*SUBSCRIBE HERE FOR API KEY: https://home.openweathermap.org/users/sign_up*/
+const apiKey = "4d8fb5b93d4af21d66a2948710284366";
 
 form.addEventListener("submit", e => {
   e.preventDefault();
   let inputVal = input.value;
 
+  //check if there's already a city
   const listItems = list.querySelectorAll(".ajax-section .city");
   const listItemsArray = Array.from(listItems);
 
   if (listItemsArray.length > 0) {
     const filteredArray = listItemsArray.filter(el => {
       let content = "";
+      //athens,gr
       if (inputVal.includes(",")) {
+        //athens,grrrrrr->invalid country code, so we keep only the first part of inputVal
         if (inputVal.split(",")[1].length > 2) {
           inputVal = inputVal.split(",")[0];
           content = el
@@ -69,6 +29,7 @@ form.addEventListener("submit", e => {
           content = el.querySelector(".city-name").dataset.name.toLowerCase();
         }
       } else {
+        //athens
         content = el.querySelector(".city-name span").textContent.toLowerCase();
       }
       return content == inputVal.toLowerCase();
@@ -84,6 +45,7 @@ form.addEventListener("submit", e => {
     }
   }
 
+  //ajax here
   const url = `https://api.openweathermap.org/data/2.5/weather?q=${inputVal}&appid=${apiKey}&units=metric`;
 
   fetch(url)
@@ -120,118 +82,3 @@ form.addEventListener("submit", e => {
   form.reset();
   input.focus();
 });
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    </script>
-    
-</footer>
